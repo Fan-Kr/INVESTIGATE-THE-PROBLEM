@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+        }
+        body {
+            background-image: url("https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Horror_%2815423421559%29.jpg/960px-Horror_%2815423421559%29.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+        #start {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: black;
+            color: white;
+            font: 24px sans-serif;
+            cursor: pointer;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <div id="start">Click to enter</div>
+
+    <audio id="bgm" src="music.mp3" loop preload="auto"></audio>
+    <audio id="scareSound" src="jumpscare.mp3" preload="auto"></audio>
+
+    <script>
+    const audio = document.getElementById("bgm");
+    const scareSound = document.getElementById("scareSound");
+    const start = document.getElementById("start");
+
+    audio.addEventListener("error", () => {
+        alert("Music failed to load. Check music.mp3.");
+    });
+
+    scareSound.addEventListener("error", () => {
+        alert("Scare audio failed to load. Check scare.mp3.");
+    });
+
+    start.addEventListener("click", async () => {
+        start.remove();
+
+        audio.play().catch(err => {
+            console.log("Music failed:", err);
+        });
+
+        scareSound.play().catch(err => {
+            console.log("Scare sound failed:", err);
+        });
+    });
+</script>
+<script src="script.js"></script>
+</body>
+</html>
